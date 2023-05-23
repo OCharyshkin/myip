@@ -1,6 +1,6 @@
 const http = require("http");
 const host = 'localhost';
-const port = 8870;
+const port = process.env.PORT || 80;
 
 const requestListener = function (req, res) {
 
