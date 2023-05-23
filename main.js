@@ -1,21 +1,9 @@
-const http = require("http");
-const host = 'localhost';
-const port = process.env.PORT || 80;
+const express = require("express");
+const app = express();
+const port = process.env.PORT || 3001;
 
-const requestListener = function (req, res) {
-
-    var ip = req.headers['x-forwarded-for'] ||
+app.get("/", (req, res) => res.send(req.headers['x-forwarded-for'] ||
 	     req.socket.remoteAddress ||
-	     'n/a';
+	     'n/a'));
 
-    res.writeHead(200);
-    res.end(ip);
-};
-
-const server = http.createServer(requestListener);
-server.listen(port, host, () => {
-
-    
-
-    console.log(`Server is running on http://${host}:${port}`);
-});
+app.listen(port, () => console.log(`app listening on port ${port}!`));
